@@ -1,0 +1,106 @@
+---
+import Navbar from "./Navbar.astro";
+import { Image } from "astro:assets";
+import myImage from "../assets/saurabh.png";
+---
+
+<div class="container">
+  <Navbar />
+  <main>
+    <div class="image-container">
+      <h4 class="hey">Hey,</h4>
+      <h4 class="there">there<span>!</span></h4>
+      <Image src={myImage} alt="Saurabh" />
+      <div class="gradient-block"></div>
+    </div>
+    <div class="name">
+      <h4 class="im">I,m</h4>
+      <h4>Saurabh</h4>
+    </div>
+    <div class="role">
+      <h4>Frontend</h4>
+      <h4>Developer</h4>
+    </div>
+  </main>
+</div>
+
+<style lang="scss">
+  @use "../styles/abstract" as *;
+
+  .container {
+    main {
+      height: calc(100% - 150px);
+      display: flex;
+      justify-content: center;
+      position: relative;
+      background: url("../assets/plant.svg") no-repeat center;
+
+      .image-container {
+        padding: 50px 50px 0;
+        position: relative;
+        .hey,
+        .there {
+          font-family: "Great Vibes", serif;
+          font-size: 10em;
+          font-weight: 300;
+          position: absolute;
+          top: 50px;
+          z-index: 1;
+          color: $light-text;
+        }
+        .hey {
+          right: 65%;
+        }
+        .there {
+          left: 65%;
+          white-space: nowrap;
+          span {
+            color: $primary-accent;
+          }
+        }
+        img {
+          height: 600px;
+          width: 100%;
+          object-fit: contain;
+        }
+
+        .gradient-block {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background: rgb(255, 252, 242);
+          background: linear-gradient(
+            0deg,
+            rgba(255, 252, 242, 1) 40%,
+            rgba(255, 255, 255, 0) 100%
+          );
+          height: 250px;
+        }
+      }
+      .name {
+        position: absolute;
+        font-size: 8rem;
+        font-weight: 900;
+        line-height: 8rem;
+        bottom: 40px;
+        left: 0;
+        z-index: 1;
+        .im {
+          font-size: 4rem;
+          line-height: 4rem;
+        }
+      }
+      .role {
+        position: absolute;
+        right: 0;
+        bottom: 60px;
+        font-size: 3rem;
+        line-height: 3rem;
+        h4 {
+          font-weight: 300;
+        }
+      }
+    }
+  }
+</style>

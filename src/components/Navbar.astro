@@ -1,0 +1,213 @@
+---
+import { IconMenu4 } from "@tabler/icons-react";
+---
+
+<nav>
+  <h4>Saurabh</h4>
+
+  <div class="desktop-nav">
+    <ul>
+      <li>
+        <a href="#"> Skills </a>
+      </li>
+      <li>
+        <a href="#"> Projects </a>
+      </li>
+      <li>
+        <a href="#"> Experience </a>
+      </li>
+    </ul>
+    <button> Contact </button>
+  </div>
+  <div class="mobile-nav">
+    <button id="menu-btn">
+      <IconMenu4 size="25" />
+    </button>
+    <div class="menu-container">
+      <ul id="nav-menu">
+        <li>
+          <a href="#"> Skills </a>
+        </li>
+        <li>
+          <a href="#"> Projects </a>
+        </li>
+        <li>
+          <a href="#"> Experience </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<style lang="scss">
+  @use "../styles/abstract" as *;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 60px;
+
+    h4 {
+      font-family: "Great Vibes", serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 3rem;
+      color: $primary-accent;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      font-weight: 500;
+      align-items: center;
+
+      li {
+        a {
+          color: $dark-text;
+          &:hover {
+            color: $primary-accent;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .desktop-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+
+      @include responsive(tablet) {
+        display: none;
+      }
+
+      ul {
+        gap: 40px;
+      }
+
+      button {
+        padding: 15px 30px;
+        border-radius: 100px;
+        outline: none;
+        border: none;
+        background: $light-text;
+        color: $light-bg;
+        cursor: pointer;
+        transition: 0.1s ease;
+        font-weight: 600;
+        font-size: 1rem;
+
+        &:hover {
+          background: $primary-accent;
+        }
+      }
+    }
+    .mobile-nav {
+      display: none;
+      position: relative;
+
+      @include responsive(tablet) {
+        display: block;
+      }
+
+      #menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        border: none;
+        background: $light-text;
+        color: $light-bg;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+          svg {
+            transform: scale(1.2);
+            transition: 0.2s ease-out;
+          }
+        }
+        z-index: 3;
+      }
+
+      .menu-container {
+        background: $light-text;
+        z-index: 2;
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-radius: 25px;
+        height: 50px;
+        width: 50px;
+        overflow: hidden;
+        #nav-menu {
+          box-sizing: border-box;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          flex-direction: column;
+          margin: 40px;
+          gap: 20px;
+
+          li {
+            a {
+              font-size: 1.2rem;
+              color: $light-bg;
+
+              &:hover {
+                color: $primary-accent;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+<script>
+  import gsap from "gsap";
+  const menuBtn = document.getElementById("menu-btn");
+  const navMenu = document.getElementById("nav-menu");
+
+  const openMenu = gsap.timeline({ paused: true });
+
+  openMenu
+    .to(".menu-container", {
+      height: "auto",
+      width: "auto",
+      duration: 0.3,
+      ease: "power4.out",
+    })
+    .from(
+      ".menu-container li",
+      {
+        y: 20,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.2,
+      },
+      "<0.05"
+    );
+
+  menuBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (openMenu.isActive() || openMenu.progress() === 1) {
+      openMenu.reverse();
+    } else {
+      openMenu.play();
+    }
+  });
+
+  navMenu?.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  window.addEventListener("click", (e) => {
+    openMenu.reverse();
+  });
+</script>
