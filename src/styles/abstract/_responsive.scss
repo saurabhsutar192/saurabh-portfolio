@@ -8,7 +8,7 @@
       @content;
     }
   } @else if $breakpoint == tablet {
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 840px) {
       @content;
     }
   } @else if $breakpoint == laptop {

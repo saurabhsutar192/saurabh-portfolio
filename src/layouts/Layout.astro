@@ -22,6 +22,7 @@
   .layout {
     .container {
       max-width: $max-width;
+      min-width: $min-width;
       margin: 0 auto;
       padding: 0 60px;
       color: $dark-text;
@@ -29,9 +30,9 @@
       @include responsive(tablet) {
         padding: 0 30px;
       }
-      @include responsive(smartphone-portrait) {
-        padding: 0 10px;
-      }
+      //   @include responsive(smartphone-portrait) {
+      //     padding: 0 16px;
+      //   }
     }
   }
 </style>

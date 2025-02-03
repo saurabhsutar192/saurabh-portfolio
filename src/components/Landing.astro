@@ -12,11 +12,12 @@ import myImage from "../assets/saurabh.png";
       <h4 class="there">there<span>!</span></h4>
       <Image src={myImage} alt="Saurabh" />
       <div class="gradient-block"></div>
+      <div class="name">
+        <h4 class="im">I,m</h4>
+        <h4>Saurabh</h4>
+      </div>
     </div>
-    <div class="name">
-      <h4 class="im">I,m</h4>
-      <h4>Saurabh</h4>
-    </div>
+
     <div class="role">
       <h4>Frontend</h4>
       <h4>Developer</h4>
@@ -30,38 +31,67 @@ import myImage from "../assets/saurabh.png";
   .container {
     main {
       height: calc(100% - 150px);
-      display: flex;
-      justify-content: center;
+      align-items: center;
       position: relative;
       background: url("../assets/plant.svg") no-repeat center;
 
       .image-container {
-        padding: 50px 50px 0;
+        padding: 0 50px 0;
         position: relative;
+
+        @include responsive(smartphone-portrait) {
+          padding: 0;
+        }
+
         .hey,
         .there {
           font-family: "Great Vibes", serif;
-          font-size: 10em;
+          font-size: 10rem;
           font-weight: 300;
           position: absolute;
-          top: 50px;
-          z-index: 1;
+          top: 6rem;
+          z-index: 0;
           color: $light-text;
+          @include responsive(tablet) {
+            font-size: 7rem;
+            top: 8rem;
+          }
+          @include responsive(smartphone-landscape) {
+            font-size: 6rem;
+            top: 7rem;
+          }
+          @include responsive(520px) {
+            font-size: max(15vw, 56px);
+          }
         }
         .hey {
-          right: 65%;
+          right: 58%;
+          @include responsive(tablet) {
+            right: 61%;
+          }
         }
         .there {
-          left: 65%;
+          left: 58%;
           white-space: nowrap;
+
+          @include responsive(tablet) {
+            left: 61%;
+          }
           span {
             color: $primary-accent;
           }
         }
         img {
-          height: 600px;
+          position: relative;
+          height: 35rem;
+          min-width: 250px;
           width: 100%;
           object-fit: contain;
+          z-index: 1;
+
+          @include responsive(smartphone-landscape) {
+            height: 30rem;
+          }
         }
 
         .gradient-block {
@@ -69,34 +99,67 @@ import myImage from "../assets/saurabh.png";
           bottom: 0;
           left: 0;
           width: 100%;
+          z-index: 2;
           background: rgb(255, 252, 242);
           background: linear-gradient(
             0deg,
             rgba(255, 252, 242, 1) 40%,
             rgba(255, 255, 255, 0) 100%
           );
-          height: 250px;
+          height: 9rem;
         }
       }
       .name {
         position: absolute;
-        font-size: 8rem;
+        font-size: 7.5rem;
         font-weight: 900;
-        line-height: 8rem;
-        bottom: 40px;
+        line-height: 7.5rem;
+        bottom: 0;
         left: 0;
-        z-index: 1;
+        z-index: 3;
+
+        @include responsive(laptop) {
+          font-size: 7rem;
+          line-height: 7rem;
+        }
+
+        @include responsive(smartphone-portrait) {
+          font-size: 4.5rem;
+          line-height: 4.5rem;
+        }
         .im {
           font-size: 4rem;
           line-height: 4rem;
+          @include responsive(laptop) {
+            font-size: 3.5rem;
+            line-height: 3.5rem;
+          }
+          @include responsive(smartphone-portrait) {
+            font-size: 2rem;
+            line-height: 2rem;
+          }
         }
       }
       .role {
         position: absolute;
         right: 0;
-        bottom: 60px;
+        bottom: 20px;
         font-size: 3rem;
         line-height: 3rem;
+        z-index: 3;
+        @include responsive(laptop) {
+          font-size: 2.5rem;
+        }
+
+        @include responsive(tablet) {
+          position: static;
+          display: flex;
+          gap: 1rem;
+        }
+
+        @include responsive(smartphone-landscape) {
+          font-size: 2rem;
+        }
         h4 {
           font-weight: 300;
         }
