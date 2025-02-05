@@ -92,4 +92,43 @@ const skillsData = [
 </style>
 <script>
   import gsap from "gsap";
+  import ScrollTrigger from "gsap/src/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const skillAnim = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".skills-container",
+      // markers: true,
+      start: "top 70%",
+    },
+  });
+
+  skillAnim
+
+    .from(".skills", {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      ease: "power4.out",
+    })
+    .from(
+      "#skills",
+      {
+        y: -20,
+        opacity: 0,
+        duration: 1,
+        ease: "circ.out",
+      },
+      "<"
+    )
+    .from(
+      ".skill-box",
+      {
+        y: 20,
+        opacity: 0,
+        stagger: 0.05,
+      },
+      "<"
+    );
 </script>
