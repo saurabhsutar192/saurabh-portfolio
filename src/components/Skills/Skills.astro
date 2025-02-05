@@ -1,0 +1,95 @@
+---
+import htmlImg from "@/assets/icons/Html.jpg";
+import CSSImg from "@/assets/icons/CSS.png";
+import FigmaImg from "@/assets/icons/Figma.png";
+import AstroImg from "@/assets/icons/Astro.png";
+import JavascriptImg from "@/assets/icons/Javascript.png";
+import NextJsImg from "@/assets/icons/NextJs.png";
+import ReactJsImg from "@/assets/icons/ReactJs.png";
+import StripeImg from "@/assets/icons/Stripe.png";
+import TypescriptImg from "@/assets/icons/typescript.png";
+import NodeImg from "@/assets/icons/Node.png";
+import githubImg from "@/assets/icons/github.png";
+import ViteImg from "@/assets/icons/Vite.png";
+import JestImg from "@/assets/icons/Jest.png";
+import CypressImg from "@/assets/icons/Cypress.png";
+import ReduxImg from "@/assets/icons/Redux.png";
+import MJMLImg from "@/assets/icons/MJML.png";
+
+import Skill from "./Skill.astro";
+
+const skillsData = [
+  { name: "HTML", img: htmlImg },
+  { name: "CSS", img: CSSImg },
+  { name: "JavaScript", img: JavascriptImg },
+  { name: "TypeScript", img: TypescriptImg },
+  { name: "ReactJs", img: ReactJsImg },
+  { name: "NextJs", img: NextJsImg },
+  { name: "Astro", img: AstroImg },
+  { name: "NodeJs", img: NodeImg },
+  { name: "Github", img: githubImg },
+  { name: "MJML", img: MJMLImg },
+  { name: "Redux", img: ReduxImg },
+  { name: "Vitest", img: ViteImg },
+  { name: "Jest", img: JestImg },
+  { name: "Cypress", img: CypressImg },
+  { name: "Stripe", img: StripeImg },
+  { name: "Figma", img: FigmaImg },
+];
+
+// Primary Skills:
+// HTML, CSS, JavaScript, Typescript, NodeJs, GitHub
+
+// Frameworks & Tools:
+// ReactJS, NextJS, Astro, Vite, React Router, Tanstack Table, Tanstack Query, MJML, React Hook Form, Mantine UI, Redux, GSAP, SASS, CSS in JS.
+
+// Testing:
+// React Testing Libary, Jest, Vitest, Cypress
+
+// Deployment:
+// AWS Amplify, GitHub Actions
+---
+
+<section class="skills-container">
+  <h4 id="skills">Skills</h4>
+  <div class="skills">
+    {skillsData.map((skill) => <Skill name={skill.name} img={skill.img} />)}
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@/styles/abstract" as *;
+  .skills-container {
+    margin: 5rem;
+
+    @include responsive(tablet) {
+      margin: 5rem 0;
+    }
+
+    h4 {
+      font-family: "Great Vibes", serif;
+      padding: 1rem 0;
+      font-size: 3rem;
+      text-align: center;
+      font-weight: 300;
+    }
+    .skills {
+      background: white;
+      padding: 1rem;
+      border-radius: 2rem;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      // display: grid;
+      // grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      @include responsive(smartphone-portrait) {
+        padding: 1rem;
+      }
+    }
+  }
+</style>
+<script>
+  import gsap from "gsap";
+</script>

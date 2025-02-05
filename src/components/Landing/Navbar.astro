@@ -1,45 +1,24 @@
 ---
 import { IconMenu4 } from "@tabler/icons-react";
+import NavLinks from "./NavLinks.astro";
 ---
 
 <nav>
   <h4>Saurabh</h4>
-
   <div class="desktop-nav">
-    <ul>
-      <li>
-        <a href="#"> Skills </a>
-      </li>
-      <li>
-        <a href="#"> Projects </a>
-      </li>
-      <li>
-        <a href="#"> Experience </a>
-      </li>
-    </ul>
-    <button> Contact </button>
+    <NavLinks />
   </div>
   <div class="mobile-nav">
     <button id="menu-btn">
       <IconMenu4 size="25" />
     </button>
     <div class="menu-container">
-      <ul id="nav-menu">
-        <li>
-          <a href="#"> Skills </a>
-        </li>
-        <li>
-          <a href="#"> Projects </a>
-        </li>
-        <li>
-          <a href="#"> Experience </a>
-        </li>
-      </ul>
+      <NavLinks />
     </div>
   </div>
 </nav>
-<style lang="scss">
-  @use "../styles/abstract" as *;
+<style lang="scss" is:global>
+  @use "@/styles/abstract" as *;
 
   nav {
     display: flex;
@@ -71,6 +50,22 @@ import { IconMenu4 } from "@tabler/icons-react";
           }
         }
       }
+      button {
+        padding: 0.8rem 1.6rem;
+        border-radius: 100px;
+        outline: none;
+        border: none;
+        background: $light-text;
+        color: $light-bg;
+        cursor: pointer;
+        transition: 0.1s ease;
+        font-weight: 600;
+        font-size: 1rem;
+
+        &:hover {
+          background: $primary-accent;
+        }
+      }
     }
 
     .desktop-nav {
@@ -85,23 +80,6 @@ import { IconMenu4 } from "@tabler/icons-react";
 
       ul {
         gap: 40px;
-      }
-
-      button {
-        padding: 15px 30px;
-        border-radius: 100px;
-        outline: none;
-        border: none;
-        background: $light-text;
-        color: $light-bg;
-        cursor: pointer;
-        transition: 0.1s ease;
-        font-weight: 600;
-        font-size: 1rem;
-
-        &:hover {
-          background: $primary-accent;
-        }
       }
     }
     .mobile-nav {
@@ -145,8 +123,7 @@ import { IconMenu4 } from "@tabler/icons-react";
         height: 50px;
         width: 50px;
         overflow: hidden;
-        #nav-menu {
-          box-sizing: border-box;
+        ul {
           display: flex;
           align-items: flex-start;
           justify-content: center;
@@ -163,6 +140,15 @@ import { IconMenu4 } from "@tabler/icons-react";
                 color: $primary-accent;
                 cursor: pointer;
               }
+            }
+          }
+          button {
+            font-size: 1.2rem;
+            background: $primary-accent;
+            border-radius: 15px;
+            &:hover {
+              background: $dark-bg;
+              color: $primary-accent;
             }
           }
         }

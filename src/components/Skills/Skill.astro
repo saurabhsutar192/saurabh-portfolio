@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+
+interface ISkillProps {
+  name: string;
+  img: ImageMetadata;
+}
+
+const { name, img } = Astro.props as ISkillProps;
+---
+
+<div class="skill-box">
+  <Image src={img} alt={name} />
+  <p>{name}</p>
+</div>
+
+<style lang="scss">
+  @use "@/styles/abstract" as *;
+
+  .skill-box {
+    flex: 1;
+    min-width: 12rem;
+    border: 1px solid $dark-bg;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
+
+    img {
+      height: 2rem;
+      width: 2rem;
+      object-fit: contain;
+    }
+    p {
+      font-weight: 500;
+    }
+  }
+</style>
