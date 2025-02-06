@@ -3,6 +3,7 @@ import Navbar from "./Navbar.astro";
 import { Image } from "astro:assets";
 import myImage from "@/assets/saurabh.png";
 import bgImage from "@/assets/plant.svg";
+import { IconChevronCompactDown } from "@tabler/icons-react";
 ---
 
 <div class="container">
@@ -28,6 +29,9 @@ import bgImage from "@/assets/plant.svg";
       <h4>Developer</h4>
     </div>
   </main>
+  <div class="down-arrow">
+    <IconChevronCompactDown />
+  </div>
 </div>
 
 <style lang="scss">
@@ -143,13 +147,16 @@ import bgImage from "@/assets/plant.svg";
         }
       }
       .name {
+        font-family: "Playfair Display", serif;
         position: absolute;
         font-size: 7.5rem;
-        font-weight: 900;
         line-height: 7.5rem;
         bottom: 0;
         left: 0;
         z-index: 3;
+        h4 {
+          font-weight: 800;
+        }
 
         @include responsive(laptop) {
           font-size: 7rem;
@@ -157,8 +164,8 @@ import bgImage from "@/assets/plant.svg";
         }
 
         @include responsive(smartphone-portrait) {
-          font-size: 4.5rem;
-          line-height: 4.5rem;
+          font-size: 5rem;
+          line-height: 5rem;
         }
         .im {
           font-size: 4rem;
@@ -168,17 +175,17 @@ import bgImage from "@/assets/plant.svg";
             line-height: 3.5rem;
           }
           @include responsive(smartphone-portrait) {
-            font-size: 2rem;
-            line-height: 2rem;
+            font-size: 3rem;
+            line-height: 3rem;
           }
         }
       }
       .role {
         position: absolute;
         right: 0;
-        bottom: 15px;
-        font-size: 3rem;
-        line-height: 3rem;
+        bottom: 7px;
+        font-size: 3.2rem;
+        line-height: 3.2rem;
         z-index: 3;
         @include responsive(laptop) {
           font-size: 2.8rem;
@@ -189,6 +196,7 @@ import bgImage from "@/assets/plant.svg";
           position: static;
           display: flex;
           gap: 0.5rem;
+          margin-top: 0.5rem;
         }
 
         @include responsive(smartphone-landscape) {
@@ -199,16 +207,26 @@ import bgImage from "@/assets/plant.svg";
         }
       }
     }
+    .down-arrow {
+      padding-top: 2rem;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
   }
 </style>
 <script>
   import gsap from "gsap";
+  import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
   const images = document.querySelectorAll(
     "img"
   ) as NodeListOf<HTMLImageElement>;
   const layout = document.querySelector(".container");
   const loader = document.querySelector(".loader");
+  const downArrow = document.querySelector(".down-arrow svg");
+
+  gsap.registerPlugin(ScrollToPlugin);
 
   let loaded = 0;
 
@@ -252,6 +270,22 @@ import bgImage from "@/assets/plant.svg";
           stagger: 0.3,
         },
         "<0.1"
+      )
+      .fromTo(
+        ".down-arrow svg",
+        {
+          opacity: 0,
+        },
+        { opacity: 1 }
+      )
+      .from(
+        ".down-arrow svg",
+        {
+          y: 10,
+          repeat: -1,
+          yoyo: true,
+        },
+        "<"
       );
   };
 
@@ -261,5 +295,9 @@ import bgImage from "@/assets/plant.svg";
     } else {
       img.addEventListener("load", checkLoadedImages);
     }
+  });
+
+  downArrow?.addEventListener("click", () => {
+    gsap.to(window, { duration: 1, scrollTo: "#skills" });
   });
 </script>
