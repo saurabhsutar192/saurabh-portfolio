@@ -1,14 +1,35 @@
-<ul>
+<ul class="nav-list">
   <li>
-    <a href="#skills"> Skills </a>
+    <button data-target="#skills"> Skills </button>
   </li>
   <li>
-    <a href="#projects"> Projects </a>
+    <button data-target="#projects"> Projects </button>
   </li>
   <li>
-    <a href="#experience"> Experience </a>
+    <button data-target="#experience"> Experience </button>
   </li>
   <li>
-    <button> Contact </button>
+    <button data-target="#contact" class="contact-btn"> Contact </button>
   </li>
 </ul>
+
+<script>
+  import gsap from "gsap";
+  import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
+
+  gsap.registerPlugin(ScrollToPlugin);
+
+  const navButtons = document.querySelectorAll(
+    ".nav-list li button"
+  ) as NodeListOf<HTMLButtonElement>;
+
+  navButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const section = (e.target as HTMLButtonElement)?.getAttribute(
+        "data-target"
+      );
+
+      section && gsap.to(window, { duration: 1, scrollTo: section });
+    });
+  });
+</script>
