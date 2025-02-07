@@ -19,14 +19,16 @@ import { IconChevronCompactDown } from "@tabler/icons-react";
         <h4 class="hey">Hey,</h4>
         <h4 class="there">there<span>!</span></h4>
       </div>
-      <div class="name anim">
+    </div>
+    <div class="details anim">
+      <div class="name">
         <h4 class="im">I,m</h4>
         <h4 class="">Saurabh</h4>
       </div>
-    </div>
-    <div class="role anim">
-      <h4>Frontend</h4>
-      <h4>Developer</h4>
+      <div class="role">
+        <h4>Frontend</h4>
+        <h4>Developer</h4>
+      </div>
     </div>
   </main>
   <div class="down-arrow">
@@ -143,68 +145,87 @@ import { IconChevronCompactDown } from "@tabler/icons-react";
               rgba(255, 252, 242, 1) 40%,
               rgba(255, 255, 255, 0) 100%
             );
-            height: 9rem;
+            height: 40%;
           }
         }
       }
-      .name {
-        font-family: "Playfair Display", serif;
+
+      .details {
         position: absolute;
-        font-size: 7.5rem;
-        line-height: 7.5rem;
+        width: 100%;
         bottom: 0;
         left: 0;
+        display: flex;
+        justify-content: space-between;
         z-index: 3;
-        h4 {
-          font-weight: 800;
-        }
-
-        @include responsive(laptop) {
-          font-size: 7rem;
-          line-height: 7rem;
-        }
-
-        @include responsive(smartphone-portrait) {
-          font-size: 5rem;
-          line-height: 5rem;
-        }
-        .im {
-          font-size: 4rem;
-          line-height: 4rem;
-          @include responsive(laptop) {
-            font-size: 3.5rem;
-            line-height: 3.5rem;
-          }
-          @include responsive(smartphone-portrait) {
-            font-size: 3rem;
-            line-height: 3rem;
-          }
-        }
-      }
-      .role {
-        position: absolute;
-        right: 0;
-        bottom: 7px;
-        font-size: 3.2rem;
-        line-height: 3.2rem;
-        z-index: 3;
-        @include responsive(laptop) {
-          font-size: 2.8rem;
-          line-height: 2.8rem;
-        }
+        align-items: flex-end;
+        background: rgb(255, 252, 242);
+        background: linear-gradient(
+          0deg,
+          rgba(255, 252, 242, 1) 40%,
+          rgba(255, 255, 255, 0) 100%
+        );
 
         @include responsive(tablet) {
-          position: static;
-          display: flex;
-          gap: 0.5rem;
-          margin-top: 0.5rem;
+          flex-direction: column;
+          align-items: flex-start;
+          position: relative;
+          z-index: 1;
+          margin-top: -5rem;
         }
 
-        @include responsive(smartphone-landscape) {
-          font-size: 2rem;
+        .name {
+          font-family: "Playfair Display", serif;
+          font-size: 7.5rem;
+          line-height: 7.5rem;
+          h4 {
+            font-weight: 800;
+          }
+
+          @include responsive(laptop) {
+            font-size: 7rem;
+            line-height: 7rem;
+          }
+
+          @include responsive(smartphone-portrait) {
+            font-size: 5rem;
+            line-height: 5rem;
+          }
+          .im {
+            font-size: 4rem;
+            line-height: 4rem;
+            @include responsive(laptop) {
+              font-size: 3.5rem;
+              line-height: 3.5rem;
+            }
+            @include responsive(smartphone-portrait) {
+              font-size: 3rem;
+              line-height: 3rem;
+            }
+          }
         }
-        h4 {
-          font-weight: 300;
+        .role {
+          margin-bottom: 0.2rem;
+          font-size: 3.2rem;
+          line-height: 3.2rem;
+
+          @include responsive(laptop) {
+            font-size: 2.8rem;
+            line-height: 2.8rem;
+          }
+
+          @include responsive(tablet) {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+          }
+
+          @include responsive(smartphone-landscape) {
+            font-size: 2rem;
+          }
+          h4 {
+            font-weight: 300;
+          }
         }
       }
     }

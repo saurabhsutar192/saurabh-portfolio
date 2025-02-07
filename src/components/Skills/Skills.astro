@@ -109,7 +109,6 @@ const skillsData = [
   });
 
   skillAnim
-
     .from(".skills", {
       opacity: 0,
       y: 30,
@@ -135,4 +134,26 @@ const skillsData = [
       },
       "<"
     );
+
+  // const skillBoxes = document.querySelectorAll(
+  //   ".skill-box"
+  // ) as NodeListOf<HTMLDivElement>;
+
+  // skillBoxes.forEach((box) => {
+  //   const blob = box.querySelector(".blob");
+
+  //   const hoverAnim = gsap.to(blob, {
+  //     top: "-1rem",
+  //     right: "-1rem",
+  //     duration: 0.5,
+  //     paused: true,
+  //   });
+
+  //   box.addEventListener("mouseenter", () => {
+  //     hoverAnim.play();
+  //   });
+  //   box.addEventListener("mouseleave", () => {
+  //     hoverAnim.reverse();
+  //   });
+  // });
 </script>
