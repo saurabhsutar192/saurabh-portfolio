@@ -19,6 +19,7 @@ import GSAPImg from "@/assets/icons/GSAP.png";
 import SASSImg from "@/assets/icons/SASS.png";
 
 import Skill from "./Skill.astro";
+import Title from "@/components/core/Title.astro";
 
 const skillsData = [
   { name: "HTML", img: htmlImg },
@@ -54,8 +55,11 @@ const skillsData = [
 // AWS Amplify, GitHub Actions
 ---
 
-<section class="skills-container">
-  <h4 id="skills">Skills</h4>
+<section id="skills" class="skills-container">
+  <Title
+    name="Skills"
+    desc="Here is a list of skills that I am proeffecient in, and I also have the ability to pick up a new skill and be good at it in very few time."
+  />
   <div class="skills">
     {skillsData.map((skill) => <Skill name={skill.name} img={skill.img} />)}
   </div>
@@ -69,32 +73,15 @@ const skillsData = [
     @include responsive(tablet) {
       margin: 5rem 0;
     }
-
-    h4 {
-      font-family: "Great Vibes", serif;
-      padding: 1rem 0;
-      font-size: 3rem;
-      text-align: center;
-    }
     .skills {
-      // background: white;
-      // padding: 2rem;
-      // border-radius: 2rem;
-      // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-      // display: grid;
-      // grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-
-      // @include responsive(smartphone-portrait) {
-      //   padding: 1rem;
-      //   border-radius: 2rem;
-      // }
     }
   }
 </style>
 <script>
+  import { parallaxIt, resetParallax } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/src/ScrollTrigger";
 
@@ -102,14 +89,14 @@ const skillsData = [
 
   const skillAnim = gsap.timeline({
     scrollTrigger: {
-      trigger: ".skills-container",
+      trigger: "#skills",
       // markers: true,
       start: "top 70%",
     },
   });
 
   skillAnim
-    .from(".skills", {
+    .from("#skills .title-container", {
       opacity: 0,
       y: 30,
       duration: 1,
@@ -138,86 +125,6 @@ const skillsData = [
   const skillBoxes = document.querySelectorAll(
     ".skill-box"
   ) as NodeListOf<HTMLDivElement>;
-
-  const parallaxIt = ({
-    e,
-    child,
-    movement,
-    container,
-    duration = 0.3,
-    ease,
-    parallaxMultiplier = 0.7,
-  }: {
-    e: MouseEvent;
-    child: HTMLElement;
-    movement: number;
-    xPercent?: number;
-    yPercent?: number;
-    container: HTMLElement;
-    duration?: number;
-    ease?: string;
-    parallaxMultiplier?: number;
-  }) => {
-    const containerPosition = {
-      left: container.getBoundingClientRect().left,
-      top: container.getBoundingClientRect().top,
-    };
-
-    const containerSize = {
-      width: container.getBoundingClientRect().width,
-      height: container.getBoundingClientRect().height,
-    };
-
-    const relX = e.clientX - containerPosition.left;
-    const relY = e.clientY - containerPosition.top;
-
-    const parallaxAnim = gsap.timeline();
-
-    parallaxAnim.to(container, {
-      x: ((relX - containerSize.width / 2) * movement) / 100,
-      y: ((relY - containerSize.height / 2) * movement) / 100,
-      duration,
-      ease: ease || "Power2.easeOut",
-    });
-
-    child &&
-      parallaxAnim.to(
-        child,
-        {
-          x:
-            ((relX - containerSize.width / 2) * movement * parallaxMultiplier) /
-            100,
-          y:
-            ((relY - containerSize.height / 2) *
-              movement *
-              parallaxMultiplier) /
-            100,
-          duration,
-          ease: ease || "Power2.easeOut",
-        },
-        "<"
-      );
-  };
-
-  const resetParallax = (container: HTMLElement, child: HTMLElement) => {
-    const resetAnim = gsap.timeline({ delay: 0 });
-
-    resetAnim
-      .to(container, {
-        x: 0,
-        y: 0,
-        duration: 0.3,
-      })
-      .to(
-        child,
-        {
-          x: 0,
-          y: 0,
-          duration: 0.3,
-        },
-        "<"
-      );
-  };
 
   skillBoxes.forEach((box) => {
     const child = box.querySelector(".skill") as HTMLDivElement;

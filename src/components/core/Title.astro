@@ -1,0 +1,34 @@
+---
+interface ITitleProps {
+  name: string;
+  desc: string;
+}
+
+const { name, desc } = Astro.props as ITitleProps;
+---
+
+<div class="title-container">
+  <h4 class="title">{name}</h4>
+  <p class="subtitle">{desc}</p>
+</div>
+
+<style lang="scss">
+  .title-container {
+    font-family: "Poppins", serif;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding: 1rem 0;
+    .title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      margin: 0 auto;
+      width: 70%;
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+    }
+  }
+</style>

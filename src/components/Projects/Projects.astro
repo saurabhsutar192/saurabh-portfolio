@@ -1,0 +1,147 @@
+---
+import Title from "@/components/core/Title.astro";
+
+import img from "@/assets/projects/piano.png";
+import onleave from "@/assets/projects/onleave.png";
+import Project from "./Project.astro";
+
+const projects = [
+  {
+    name: "The Piano",
+    img,
+    desc: "A minimalistic and light-weight MIDI piano for the WEB.",
+    link: "https://thepiano.vercel.app",
+  },
+  {
+    name: "OnLeave",
+    img: onleave,
+    desc: "A leave management app to manage the Org Employee's leaves.",
+    link: "https://www.onleave.today",
+  },
+];
+---
+
+<section id="projects">
+  <Title
+    name="Projects"
+    desc="Have a look at some of my recent works, where I have applied my skillset to the extreme level to deliver high quality frontend experience."
+  />
+  <div class="projects-container">
+    {
+      projects.map((proj) => (
+        <Project
+          name={proj.name}
+          img={proj.img}
+          desc={proj.desc}
+          link={proj.link}
+        />
+      ))
+    }
+    <div class="more-projects">
+      <h3>Find more of my work!</h3>
+      <p>
+        This will take you to my GitHub Repository, where you will find my above
+        projects as well as a lot of small scale projects made using different
+        technologies.
+      </p>
+      <button>
+        <a
+          href="https://github.com/saurabhsutar192?tab=repositories"
+          target="_blank"
+        >
+          Checkout Repository
+        </a>
+      </button>
+    </div>
+  </div>
+</section>
+<style lang="scss">
+  @use "@/styles/abstract" as *;
+
+  #projects {
+    margin: 10rem 0;
+
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      .more-projects {
+        padding: 4rem;
+        background: $dark-text;
+        color: $light-bg;
+        border-radius: 1rem;
+        text-align: center;
+        box-shadow:
+          rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+          rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+        h3 {
+          font-size: 4rem;
+          margin-bottom: 2rem;
+        }
+        p {
+          line-height: 1.5rem;
+          margin-bottom: 4rem;
+        }
+
+        button {
+          border: none;
+          background: none;
+
+          a {
+            display: block;
+            border: 2px solid $light-bg;
+            padding: 1rem 2rem;
+            color: $light-bg;
+            font-size: 1.5rem;
+            border-radius: 100px;
+            transition: 0.2s ease;
+
+            &:hover {
+              background: $primary-accent;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/src/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  const projectsAnim = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#projects",
+      //   markers: true,
+      start: "top 70%",
+      end: "bottom bottom",
+      scrub: 1,
+      once: true,
+    },
+  });
+
+  projectsAnim
+    .from("#projects .title-container", {
+      opacity: 0,
+      y: -30,
+      duration: 1,
+      ease: "power4.out",
+    })
+    .from(
+      "#projects .project-card",
+      {
+        y: 30,
+        stagger: 0.5,
+        opacity: 0,
+      },
+      "<"
+    )
+    .from("#projects .more-projects", {
+      x: -200,
+      opacity: 0,
+    });
+</script>
