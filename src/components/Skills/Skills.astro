@@ -75,22 +75,22 @@ const skillsData = [
       padding: 1rem 0;
       font-size: 3rem;
       text-align: center;
-      font-weight: 300;
     }
     .skills {
-      background: white;
-      padding: 1rem;
-      border-radius: 2rem;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      // background: white;
+      // padding: 2rem;
+      // border-radius: 2rem;
+      // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
       // display: grid;
       // grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
 
-      @include responsive(smartphone-portrait) {
-        padding: 1rem;
-      }
+      // @include responsive(smartphone-portrait) {
+      //   padding: 1rem;
+      //   border-radius: 2rem;
+      // }
     }
   }
 </style>
@@ -135,25 +135,104 @@ const skillsData = [
       "<"
     );
 
-  // const skillBoxes = document.querySelectorAll(
-  //   ".skill-box"
-  // ) as NodeListOf<HTMLDivElement>;
+  const skillBoxes = document.querySelectorAll(
+    ".skill-box"
+  ) as NodeListOf<HTMLDivElement>;
 
-  // skillBoxes.forEach((box) => {
-  //   const blob = box.querySelector(".blob");
+  const parallaxIt = ({
+    e,
+    child,
+    movement,
+    container,
+    duration = 0.3,
+    ease,
+    parallaxMultiplier = 0.7,
+  }: {
+    e: MouseEvent;
+    child: HTMLElement;
+    movement: number;
+    xPercent?: number;
+    yPercent?: number;
+    container: HTMLElement;
+    duration?: number;
+    ease?: string;
+    parallaxMultiplier?: number;
+  }) => {
+    const containerPosition = {
+      left: container.getBoundingClientRect().left,
+      top: container.getBoundingClientRect().top,
+    };
 
-  //   const hoverAnim = gsap.to(blob, {
-  //     top: "-1rem",
-  //     right: "-1rem",
-  //     duration: 0.5,
-  //     paused: true,
-  //   });
+    const containerSize = {
+      width: container.getBoundingClientRect().width,
+      height: container.getBoundingClientRect().height,
+    };
 
-  //   box.addEventListener("mouseenter", () => {
-  //     hoverAnim.play();
-  //   });
-  //   box.addEventListener("mouseleave", () => {
-  //     hoverAnim.reverse();
-  //   });
-  // });
+    const relX = e.clientX - containerPosition.left;
+    const relY = e.clientY - containerPosition.top;
+
+    const parallaxAnim = gsap.timeline();
+
+    parallaxAnim.to(container, {
+      x: ((relX - containerSize.width / 2) * movement) / 100,
+      y: ((relY - containerSize.height / 2) * movement) / 100,
+      duration,
+      ease: ease || "Power2.easeOut",
+    });
+
+    child &&
+      parallaxAnim.to(
+        child,
+        {
+          x:
+            ((relX - containerSize.width / 2) * movement * parallaxMultiplier) /
+            100,
+          y:
+            ((relY - containerSize.height / 2) *
+              movement *
+              parallaxMultiplier) /
+            100,
+          duration,
+          ease: ease || "Power2.easeOut",
+        },
+        "<"
+      );
+  };
+
+  const resetParallax = (container: HTMLElement, child: HTMLElement) => {
+    const resetAnim = gsap.timeline({ delay: 0 });
+
+    resetAnim
+      .to(container, {
+        x: 0,
+        y: 0,
+        duration: 0.3,
+      })
+      .to(
+        child,
+        {
+          x: 0,
+          y: 0,
+          duration: 0.3,
+        },
+        "<"
+      );
+  };
+
+  skillBoxes.forEach((box) => {
+    const child = box.querySelector(".skill") as HTMLDivElement;
+
+    box.addEventListener("mouseleave", (e) => {
+      resetParallax(e.currentTarget as HTMLDivElement, child);
+    });
+    box.addEventListener("mousemove", (e) => {
+      e.currentTarget &&
+        parallaxIt({
+          e: e,
+          child: child,
+          container: e.currentTarget as HTMLDivElement,
+          movement: 5,
+        });
+    });
+  });
 </script>
