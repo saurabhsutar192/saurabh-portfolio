@@ -1,0 +1,93 @@
+---
+import {
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+} from "@tabler/icons-react";
+---
+
+<footer>
+  <div class="rights-reserved">
+    <p>© 2025. All Rights Reserved.</p>
+  </div>
+  <div class="social">
+    <a href="https://www.instagram.com/_saurabh__sutar_" target="_blank">
+      <IconBrandInstagram />
+    </a>
+    <a href="https://github.com/saurabhsutar192" target="_blank">
+      <IconBrandGithub />
+    </a>
+    <a
+      href="https://www.linkedin.com/in/saurabh-sutar-10a148176/"
+      target="_blank"
+    >
+      <IconBrandLinkedin />
+    </a>
+  </div>
+  <div class="back-to-top">
+    <button> Back to top </button>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use "../styles/abstract" as *;
+
+  footer {
+    margin-top: 5rem;
+    border-top: 2px solid $dark-text;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .rights-reserved,
+  .social,
+  .back-to-top {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .rights-reserved {
+    justify-content: flex-start;
+  }
+  .social {
+    gap: 1rem;
+    justify-content: center;
+    transition: 0.2s ease;
+    a {
+      color: $dark-text;
+      &:hover {
+        color: $primary-accent;
+      }
+    }
+  }
+  .back-to-top {
+    justify-content: flex-end;
+    button {
+      padding: 1rem;
+      background: $light-text;
+      border: none;
+      color: $light-bg;
+      font-size: 1rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      transition: 0.2s ease;
+      cursor: pointer;
+      &:hover {
+        background: $primary-accent;
+      }
+    }
+  }
+</style>
+<script>
+  import gsap from "gsap";
+  import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
+
+  gsap.registerPlugin(ScrollToPlugin);
+
+  const topButton = document.querySelector(".back-to-top button");
+
+  topButton?.addEventListener("click", () => {
+    gsap.to(window, { duration: 1, scrollTo: "top" });
+  });
+</script>
