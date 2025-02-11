@@ -135,7 +135,7 @@ const projects = [
       "#projects .project-card",
       {
         y: 30,
-        stagger: 0.5,
+        stagger: 0.3,
         opacity: 0,
       },
       "<"
@@ -143,5 +143,6 @@ const projects = [
     .from("#projects .more-projects", {
       x: -200,
       opacity: 0,
+      ease: "power4.in",
     });
 </script>

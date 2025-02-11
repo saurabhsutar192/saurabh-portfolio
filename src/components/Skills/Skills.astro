@@ -53,22 +53,30 @@ const skillsData = [
 
 // Deployment:
 // AWS Amplify, GitHub Actions
+
+const currentYear = new Date().getFullYear();
+const currentMonth = new Date().getMonth() + 1;
+const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
 ---
 
 <section id="skills" class="skills-container">
   <Title
-    name="Skills"
-    desc="Here is a list of skills that I am proeffecient in, and I also have the ability to pick up a new skill and be good at it in very few time."
+    name="Skills & Experience"
+    desc="Here is a list of skills that I am proeffecient in, and I also have the ability to pick up a new skill and be good at it in a very less time."
   />
   <div class="skills">
     {skillsData.map((skill) => <Skill name={skill.name} img={skill.img} />)}
+  </div>
+  <div class="experience">
+    <h3>{experience}+ Years of Experience</h3>
+    <p>SINCE 2021</p>
   </div>
 </section>
 
 <style lang="scss">
   @use "@/styles/abstract" as *;
   .skills-container {
-    margin: 5rem;
+    margin: 5rem 0;
 
     @include responsive(tablet) {
       margin: 5rem 0;
@@ -77,6 +85,37 @@ const skillsData = [
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+    }
+    .experience {
+      margin-top: 3rem;
+      padding: 4rem;
+      border-radius: 1rem;
+      background: $dark-text;
+      color: $light-bg;
+
+      @include responsive(smartphone-landscape) {
+        padding: 4rem 2rem;
+      }
+
+      h3 {
+        font-size: 3rem;
+        text-align: center;
+
+        @include responsive(smartphone-landscape) {
+          font-size: 2.5rem;
+        }
+      }
+      p {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-weight: 900;
+        letter-spacing: 1rem;
+        line-height: 1.7rem;
+        @include responsive(smartphone-landscape) {
+          font-size: 0.7rem;
+          letter-spacing: 0.5rem;
+        }
+      }
     }
   }
 </style>
@@ -92,26 +131,19 @@ const skillsData = [
       trigger: "#skills",
       // markers: true,
       start: "top 70%",
+      end: "bottom bottom",
+      scrub: 1,
+      once: true,
     },
   });
 
   skillAnim
     .from("#skills .title-container", {
       opacity: 0,
-      y: 30,
+      y: -30,
       duration: 1,
       ease: "power4.out",
     })
-    .from(
-      "#skills",
-      {
-        y: -20,
-        opacity: 0,
-        duration: 1,
-        ease: "circ.out",
-      },
-      "<"
-    )
     .from(
       ".skill-box",
       {
@@ -120,7 +152,12 @@ const skillsData = [
         stagger: 0.05,
       },
       "<"
-    );
+    )
+    .from(".experience", {
+      opacity: 0,
+      x: -200,
+      ease: "power4.in",
+    });
 
   const skillBoxes = document.querySelectorAll(
     ".skill-box"

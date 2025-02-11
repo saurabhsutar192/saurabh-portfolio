@@ -242,10 +242,12 @@ import { IconChevronCompactDown } from "@tabler/icons-react";
   import gsap from "gsap";
   import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
-  const images = document.querySelectorAll(
-    "img"
-  ) as NodeListOf<HTMLImageElement>;
   const layout = document.querySelector(".container");
+
+  const images = document.querySelectorAll(
+    ".section-container img"
+  ) as NodeListOf<HTMLImageElement>;
+
   const loader = document.querySelector(".loader");
   const downArrow = document.querySelector(".down-arrow svg");
 
