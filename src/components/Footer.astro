@@ -24,6 +24,7 @@ import {
       <IconBrandLinkedin />
     </a>
   </div>
+
   <div class="back-to-top">
     <button> Back to top </button>
   </div>
@@ -38,6 +39,13 @@ import {
     padding: 2rem 0;
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
+
+    @include responsive(tablet) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
   .rights-reserved,
   .social,
@@ -45,6 +53,11 @@ import {
     flex: 1;
     display: flex;
     align-items: center;
+
+    // @include responsive(tablet) {
+    //   //   align-items: center !important;
+    //   //   justify-content: center;
+    // }
   }
 
   .rights-reserved {

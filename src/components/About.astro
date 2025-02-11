@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import Title from "./core/Title.astro";
+import aboutImg from "@/assets/about.webp";
+---
+
+<section id="about">
+  <Title name="About Me" desc="Know more about me!" />
+
+  <div class="about-content">
+    <div class="img-container"><Image src={aboutImg} alt="Setup" /></div>
+
+    <p>
+      I am currently working as a <span>Frontend Developer</span> at <span
+        >AntStack Technologies, Bengaluru</span
+      >, where my passion for building seamless and dynamic user experiences
+      comes to life. Beyond coding, I’m a <span>musician </span>at heart—I play
+      the <span>piano</span> and find creative inspiration through music. In my free
+      time, you’ll often find me immersed in <span>gaming</span> on my <span
+        >PC</span
+      >, exploring new worlds and challenging my skills.
+    </p>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@/styles/abstract" as *;
+
+  #about {
+    margin-bottom: 10rem;
+    .about-content {
+      display: flex;
+      gap: 2rem;
+
+      @include responsive(tablet) {
+        flex-direction: column;
+      }
+
+      .img-container {
+        flex: 1;
+        height: 30rem;
+        border-radius: 2rem;
+        overflow: hidden;
+
+        @include responsive(tablet) {
+          flex: unset;
+          height: 20rem;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      p {
+        flex: 1;
+        font-size: 1.2rem;
+        line-height: 2.5rem;
+        font-weight: 500;
+        span {
+          font-size: 1.6rem;
+          margin: 0.3rem;
+          font-weight: 900;
+          transition: 0.2s ease;
+          &:hover {
+            color: $primary-accent;
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/src/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const aboutAnim = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#about",
+      //   markers: true,
+      start: "top 70%",
+      end: "bottom bottom",
+      scrub: 1,
+      once: true,
+    },
+  });
+
+  aboutAnim
+    .from("#about .title-container", {
+      opacity: 0,
+      y: -30,
+      duration: 1,
+      ease: "power4.out",
+    })
+    .from("#about .img-container", {
+      x: -200,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.in",
+    })
+    .from(
+      "#about .about-content p",
+      {
+        x: 200,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.in",
+      },
+      "<"
+    );
+</script>

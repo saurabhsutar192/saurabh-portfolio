@@ -9,7 +9,7 @@ const { name, desc } = Astro.props as ITitleProps;
 
 <div class="title-container">
   <h4 class="title">{name}</h4>
-  <p class="subtitle">{desc}</p>
+  {desc && <p class="subtitle">{desc}</p>}
 </div>
 
 <style lang="scss">
