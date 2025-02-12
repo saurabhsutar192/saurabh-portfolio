@@ -29,7 +29,8 @@
         "data-target"
       );
 
-      section && gsap.to(window, { duration: 1, scrollTo: section });
+      section &&
+        gsap.to(window, { duration: 1, scrollTo: { y: section, x: 0 } });
     });
   });
 </script>

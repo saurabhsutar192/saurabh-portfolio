@@ -323,6 +323,6 @@ import { IconChevronCompactDown } from "@tabler/icons-react";
   });
 
   downArrow?.addEventListener("click", () => {
-    gsap.to(window, { duration: 1, scrollTo: "#skills" });
+    gsap.to(window, { duration: 1, scrollTo: { y: "#projects", x: 0 } });
   });
 </script>

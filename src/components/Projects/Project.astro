@@ -32,7 +32,7 @@ const { name, img, desc, link } = Astro.props as IProjectProps;
     border-radius: 1rem;
     flex: 1;
     min-width: 20rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border: 1px solid $light-border;
     position: relative;
     overflow: hidden;
 
@@ -42,7 +42,7 @@ const { name, img, desc, link } = Astro.props as IProjectProps;
       object-fit: cover;
       border-radius: 0.5rem;
       object-position: top;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      border: 1px solid $light-border;
     }
     &:nth-child(3) {
       img {
