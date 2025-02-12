@@ -4,6 +4,7 @@ import Title from "@/components/core/Title.astro";
 import img from "@/assets/projects/piano.png";
 import onleave from "@/assets/projects/onleave.png";
 import Project from "./Project.astro";
+import DarkCard from "../core/DarkCard.astro";
 
 const projects = [
   {
@@ -37,22 +38,24 @@ const projects = [
         />
       ))
     }
-    <div class="more-projects">
-      <h3>Find more of my work!</h3>
-      <p>
-        This will take you to my GitHub Repository, where you will find my above
-        projects as well as a lot of small scale projects made using different
-        technologies.
-      </p>
-      <button>
-        <a
-          href="https://github.com/saurabhsutar192?tab=repositories"
-          target="_blank"
-        >
-          Checkout Repository
-        </a>
-      </button>
-    </div>
+    <DarkCard>
+      <div class="more-projects">
+        <h3>Find more of my work!</h3>
+        <p>
+          This will take you to my GitHub Repository, where you will find my
+          above projects as well as a lot of small scale projects made using
+          different technologies.
+        </p>
+        <button>
+          <a
+            href="https://github.com/saurabhsutar192?tab=repositories"
+            target="_blank"
+          >
+            Checkout Repository
+          </a>
+        </button>
+      </div>
+    </DarkCard>
   </div>
 </section>
 <style lang="scss">
@@ -68,18 +71,22 @@ const projects = [
       justify-content: center;
       .more-projects {
         padding: 4rem;
-        background: $dark-text;
-        color: $light-bg;
-        border-radius: 1rem;
         text-align: center;
 
         h3 {
           font-size: 4rem;
           margin-bottom: 2rem;
+          @include responsive(smartphone-landscape) {
+            font-size: 2.5rem;
+          }
         }
         p {
           line-height: 1.5rem;
           margin-bottom: 4rem;
+
+          @include responsive(smartphone-landscape) {
+            font-size: 0.7rem;
+          }
         }
 
         button {
@@ -93,10 +100,14 @@ const projects = [
             color: $light-bg;
             font-size: 1.5rem;
             border-radius: 100px;
-            transition: 0.2s ease;
+            transition: 0.3s ease-out;
+
+            @include responsive(smartphone-landscape) {
+              font-size: 0.8rem;
+            }
 
             &:hover {
-              background: $primary-accent;
+              scale: 1.1;
             }
           }
         }
@@ -122,7 +133,7 @@ const projects = [
   });
 
   projectsAnim
-    .from("#projects .title-container", {
+    .from("#projects .title", {
       opacity: 0,
       y: -30,
       duration: 1,
@@ -137,7 +148,7 @@ const projects = [
       },
       "<"
     )
-    .from("#projects .more-projects", {
+    .from("#projects .dark-card", {
       x: -200,
       opacity: 0,
       ease: "power4.in",

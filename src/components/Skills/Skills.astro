@@ -20,6 +20,7 @@ import SASSImg from "@/assets/icons/SASS.png";
 
 import Skill from "./Skill.astro";
 import Title from "@/components/core/Title.astro";
+import DarkCard from "../core/DarkCard.astro";
 
 const skillsData = [
   { name: "HTML", img: htmlImg },
@@ -67,10 +68,12 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
   <div class="skills">
     {skillsData.map((skill) => <Skill name={skill.name} img={skill.img} />)}
   </div>
-  <div class="experience">
-    <h3>{experience}+ Years of Experience</h3>
-    <p>SINCE 2021</p>
-  </div>
+  <DarkCard>
+    <div class="experience">
+      <h3>{experience}+ Years of Experience</h3>
+      <p>SINCE 2021</p>
+    </div>
+  </DarkCard>
 </section>
 
 <style lang="scss">
@@ -82,20 +85,17 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+      margin-bottom: 3rem;
     }
     .experience {
-      margin-top: 3rem;
       padding: 4rem;
-      border-radius: 1rem;
-      background: $dark-text;
-      color: $light-bg;
 
       @include responsive(smartphone-landscape) {
         padding: 4rem 2rem;
       }
 
       h3 {
-        font-size: 3rem;
+        font-size: 4rem;
         text-align: center;
 
         @include responsive(smartphone-landscape) {
@@ -135,14 +135,14 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
   });
 
   skillAnim
-    .from("#skills .title-container", {
+    .from("#skills .title", {
       opacity: 0,
       y: -30,
       duration: 1,
       ease: "power4.out",
     })
     .from(
-      ".skill-box",
+      "#skills .skill-box",
       {
         y: 20,
         opacity: 0,
@@ -150,7 +150,7 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
       },
       "<"
     )
-    .from(".experience", {
+    .from("#skills .dark-card", {
       opacity: 0,
       x: -200,
       ease: "power4.in",

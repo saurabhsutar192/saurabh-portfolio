@@ -1,14 +1,14 @@
 ---
 import { Image } from "astro:assets";
 
-interface IProjectProps {
+interface Props {
   name: string;
   img: ImageMetadata;
   desc: string;
   link: string;
 }
 
-const { name, img, desc, link } = Astro.props as IProjectProps;
+const { name, img, desc, link } = Astro.props;
 ---
 
 <div class="project-card">

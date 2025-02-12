@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
 
-interface ISkillProps {
+interface Props {
   name: string;
   img: ImageMetadata;
 }
 
-const { name, img } = Astro.props as ISkillProps;
+const { name, img } = Astro.props;
 ---
 
 <div class="skill-box">

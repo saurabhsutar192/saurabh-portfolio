@@ -1,39 +1,48 @@
 ---
+import DarkCard from "./core/DarkCard.astro";
 import Title from "./core/Title.astro";
 ---
 
 <section id="contact">
   <Title name="Contact" desc="Reach out to me!" />
-  <div class="contact-card">
-    <h3>Say Hello!</h3>
-    <div class="contact-desc">
-      <a href="mailto:saurabhsutar192@gmail.com">saurabhsutar192@gmail.com</a>
-      <p>+91-9405480824</p>
+  <DarkCard>
+    <div class="contact-card">
+      <h3>Say Hello!</h3>
+      <div class="contact-desc">
+        <a href="mailto:saurabhsutar192@gmail.com">saurabhsutar192@gmail.com</a>
+        <p>+91-9405480824</p>
+      </div>
     </div>
-  </div>
+  </DarkCard>
 </section>
 <style lang="scss">
   @use "@/styles/abstract" as *;
 
   #contact {
+    margin-bottom: 10rem;
     .contact-card {
-      background: $dark-text;
-      color: $light-bg;
       padding: 4rem;
-      border-radius: 1rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
       justify-content: center;
       align-items: center;
-      margin-bottom: 10rem;
 
       h3 {
         font-size: 8rem;
         text-align: center;
+        white-space: nowrap;
+
+        @include responsive(laptop) {
+          font-size: 6rem;
+        }
+
+        @include responsive(tablet) {
+          font-size: 5rem;
+        }
 
         @include responsive(smartphone-landscape) {
-          font-size: 5rem;
+          font-size: 4rem;
         }
       }
       .contact-desc {
@@ -48,8 +57,8 @@ import Title from "./core/Title.astro";
         p {
           white-space: nowrap;
           color: $light-bg;
-          &:hover {
-            color: $primary-accent;
+          @include responsive(smartphone-landscape) {
+            font-size: 0.8rem;
           }
         }
       }
@@ -74,13 +83,13 @@ import Title from "./core/Title.astro";
   });
 
   contactAnim
-    .from("#contact .title-container", {
+    .from("#contact .title", {
       opacity: 0,
       y: -30,
       duration: 1,
       ease: "power4.out",
     })
-    .from("#contact .contact-card", {
+    .from("#contact .dark-card", {
       x: -200,
       opacity: 0,
       ease: "power4.in",
