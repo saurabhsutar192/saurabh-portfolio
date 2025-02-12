@@ -5,7 +5,7 @@ export const parallaxIt = ({
   child,
   movement,
   container,
-  duration = 0.3,
+  duration = 1,
   ease,
   parallaxMultiplier = 0.7,
 }: {
@@ -62,7 +62,7 @@ export const resetParallax = (container: HTMLElement, child?: HTMLElement) => {
   resetAnim.to(container, {
     x: 0,
     y: 0,
-    duration: 0.3,
+    duration: 1,
   });
 
   child &&
@@ -71,7 +71,7 @@ export const resetParallax = (container: HTMLElement, child?: HTMLElement) => {
       {
         x: 0,
         y: 0,
-        duration: 0.3,
+        duration: 1,
       },
       "<"
     );
