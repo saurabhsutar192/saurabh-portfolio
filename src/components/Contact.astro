@@ -1,0 +1,88 @@
+---
+import Title from "./core/Title.astro";
+---
+
+<section id="contact">
+  <Title name="Contact" desc="Reach out to me!" />
+  <div class="contact-card">
+    <h3>Say Hello!</h3>
+    <div class="contact-desc">
+      <a href="mailto:saurabhsutar192@gmail.com">saurabhsutar192@gmail.com</a>
+      <p>+91-9405480824</p>
+    </div>
+  </div>
+</section>
+<style lang="scss">
+  @use "@/styles/abstract" as *;
+
+  #contact {
+    .contact-card {
+      background: $dark-text;
+      color: $light-bg;
+      padding: 4rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10rem;
+
+      h3 {
+        font-size: 8rem;
+        text-align: center;
+
+        @include responsive(smartphone-landscape) {
+          font-size: 5rem;
+        }
+      }
+      .contact-desc {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        a,
+        p {
+          white-space: nowrap;
+          color: $light-bg;
+          &:hover {
+            color: $primary-accent;
+          }
+        }
+      }
+    }
+  }
+</style>
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/src/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const contactAnim = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#contact",
+      //   markers: true,
+      start: "top 70%",
+      end: "bottom bottom",
+      scrub: 1,
+      once: true,
+    },
+  });
+
+  contactAnim
+    .from("#contact .title-container", {
+      opacity: 0,
+      y: -30,
+      duration: 1,
+      ease: "power4.out",
+    })
+    .from("#contact .contact-card", {
+      x: -200,
+      opacity: 0,
+      ease: "power4.in",
+    });
+</script>
