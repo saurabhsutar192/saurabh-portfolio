@@ -75,7 +75,7 @@ export const parallaxIt = ({
     y: ((relY - containerSize.height / 2) * movement) / 100,
     duration,
     scale,
-    ease: ease ?? "Power2.easeOut",
+    ease: ease ?? "circ.out",
   });
 
   child &&
@@ -89,7 +89,7 @@ export const parallaxIt = ({
           ((relY - containerSize.height / 2) * movement * parallaxMultiplier) /
           100,
         duration,
-        ease: ease ?? "Power2.easeOut",
+        ease: ease ?? "circ.out",
       },
       "<"
     );
