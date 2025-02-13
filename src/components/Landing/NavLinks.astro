@@ -9,11 +9,12 @@
     <button data-target="#about"> About Me</button>
   </li>
   <li>
-    <button data-target="#contact" class="contact-btn"> Contact </button>
+    <button data-target="#contact" class="contact-btn"><p>Contact</p> </button>
   </li>
 </ul>
 
 <script>
+  import { parallaxIt, resetParallax } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
@@ -31,6 +32,23 @@
 
       section &&
         gsap.to(window, { duration: 1, scrollTo: { y: section, x: 0 } });
+    });
+
+    const p = button.querySelector("p") as HTMLParagraphElement;
+
+    button.addEventListener("mousemove", (e) => {
+      e.currentTarget &&
+        parallaxIt({
+          e: e,
+          container: e.currentTarget as HTMLButtonElement,
+          child: p || null,
+          movement: 10,
+          parallaxMultiplier: 0.3,
+          scale: 1.1,
+        });
+    });
+    button.addEventListener("mouseleave", (e) => {
+      resetParallax({ container: e.currentTarget as HTMLButtonElement });
     });
   });
 </script>

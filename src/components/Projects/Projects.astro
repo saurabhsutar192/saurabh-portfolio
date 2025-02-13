@@ -27,18 +27,19 @@ const projects = [
     name="Projects"
     desc="Have a look at some of my recent works, where I have applied my skillset to the extreme level to deliver high quality frontend experience."
   />
-  <div class="projects-container">
-    {
-      projects.map((proj) => (
-        <Project
-          name={proj.name}
-          img={proj.img}
-          desc={proj.desc}
-          link={proj.link}
-        />
-      ))
-    }
-    <DarkCard>
+  <DarkCard>
+    <div class="projects-container">
+      {
+        projects.map((proj) => (
+          <Project
+            name={proj.name}
+            img={proj.img}
+            desc={proj.desc}
+            link={proj.link}
+          />
+        ))
+      }
+
       <div class="more-projects">
         <h3>Find more of my work!</h3>
         <p>
@@ -55,8 +56,8 @@ const projects = [
           </a>
         </button>
       </div>
-    </DarkCard>
-  </div>
+    </div>
+  </DarkCard>
 </section>
 <style lang="scss">
   @use "@/styles/abstract" as *;
@@ -65,13 +66,22 @@ const projects = [
     margin: 10rem 0;
 
     .projects-container {
+      padding: 3rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 3rem;
       justify-content: center;
       .more-projects {
-        padding: 4rem;
+        padding: 4rem 2rem;
         text-align: center;
+        background-image: linear-gradient(
+          to right,
+          $light-bg 70%,
+          rgba(255, 255, 255, 0) 0%
+        );
+        background-position: top;
+        background-size: 30px 2px;
+        background-repeat: repeat-x;
 
         h3 {
           font-size: 4rem;
@@ -90,24 +100,16 @@ const projects = [
         }
 
         button {
-          border: none;
           background: none;
-
+          border: 2px solid $light-bg;
+          padding: 1rem 2rem;
+          border-radius: 1rem;
           a {
             display: block;
-            border: 2px solid $light-bg;
-            padding: 1rem 2rem;
             color: $light-bg;
             font-size: 1.5rem;
-            border-radius: 100px;
-            transition: 0.3s ease-out;
-
             @include responsive(smartphone-landscape) {
               font-size: 0.8rem;
-            }
-
-            &:hover {
-              scale: 1.1;
             }
           }
         }
@@ -117,6 +119,7 @@ const projects = [
 </style>
 
 <script>
+  import { parallaxIt, resetParallax } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/src/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
@@ -124,7 +127,7 @@ const projects = [
   const projectsAnim = gsap.timeline({
     scrollTrigger: {
       trigger: "#projects",
-      //   markers: true,
+      // markers: true,
       start: "top 70%",
       end: "bottom bottom",
       scrub: 1,
@@ -140,17 +143,54 @@ const projects = [
       ease: "power4.out",
     })
     .from(
-      "#projects .project-card",
+      "#projects .dark-card",
       {
-        y: 30,
-        stagger: 0.3,
+        y: 50,
         opacity: 0,
+        ease: "power4.in",
       },
       "<"
     )
-    .from("#projects .dark-card", {
-      x: -200,
-      opacity: 0,
-      ease: "power4.in",
+    .from(
+      "#projects .project-card",
+      {
+        y: 50,
+        opacity: 0,
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .from(
+      "#projects .more-projects",
+      {
+        y: 50,
+        opacity: 0,
+        ease: "power4.out",
+      },
+      "<0.5"
+    );
+
+  const button = document.querySelector(
+    ".more-projects button"
+  ) as HTMLButtonElement;
+
+  const a = button.querySelector("a") as HTMLAnchorElement;
+
+  button.addEventListener("mousemove", (e) => {
+    e.currentTarget &&
+      parallaxIt({
+        e: e,
+        child: a,
+        container: e.currentTarget as HTMLDivElement,
+        movement: 5,
+        parallaxMultiplier: 0.5,
+        scale: 1.1,
+      });
+  });
+  button.addEventListener("mouseleave", (e) => {
+    resetParallax({
+      container: e.currentTarget as HTMLDivElement,
+      child: a,
     });
+  });
 </script>

@@ -18,4 +18,8 @@ body {
   height: 100%;
   background: $light-bg;
   overflow-x: hidden;
+
+  a {
+    text-decoration: none !important;
+  }
 }

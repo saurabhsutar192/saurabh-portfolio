@@ -1,9 +1,17 @@
-<div class="dark-card">
+---
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class={`dark-card ${className}`}>
   <slot />
   <div class="cursor-blob"></div>
 </div>
 
-<style lang="scss">
+<style lang="scss" is:global>
   @use "@/styles/abstract" as *;
 
   .dark-card {

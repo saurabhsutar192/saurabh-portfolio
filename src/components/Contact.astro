@@ -10,7 +10,7 @@ import Title from "./core/Title.astro";
       <h3>Say Hello!</h3>
       <div class="contact-desc">
         <a href="mailto:saurabhsutar192@gmail.com">saurabhsutar192@gmail.com</a>
-        <p>+91-9405480824</p>
+        <a href="tel:+91940548082">+91-9405480824</a>
       </div>
     </div>
   </DarkCard>
@@ -53,10 +53,11 @@ import Title from "./core/Title.astro";
         flex-wrap: wrap;
         gap: 1rem;
 
-        a,
-        p {
+        a {
           white-space: nowrap;
           color: $light-bg;
+          font-weight: 600;
+
           @include responsive(smartphone-landscape) {
             font-size: 0.8rem;
           }
@@ -66,6 +67,7 @@ import Title from "./core/Title.astro";
   }
 </style>
 <script>
+  import { parallaxIt, resetParallax } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/src/ScrollTrigger";
 
@@ -90,8 +92,29 @@ import Title from "./core/Title.astro";
       ease: "power4.out",
     })
     .from("#contact .dark-card", {
-      x: -200,
+      y: 50,
       opacity: 0,
-      ease: "power4.in",
+      duration: 10,
+      ease: "power4.out",
     });
+
+  const anchors = document.querySelectorAll(
+    "#contact a"
+  ) as NodeListOf<HTMLAnchorElement>;
+
+  anchors.forEach((a) => {
+    a.addEventListener("mousemove", (e) => {
+      e.currentTarget &&
+        parallaxIt({
+          e: e,
+          container: e.currentTarget as HTMLDivElement,
+          movement: 10,
+          parallaxMultiplier: 0.5,
+          scale: 1.2,
+        });
+    });
+    a.addEventListener("mouseleave", (e) => {
+      resetParallax({ container: e.currentTarget as HTMLDivElement });
+    });
+  });
 </script>

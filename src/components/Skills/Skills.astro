@@ -65,13 +65,14 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
     name="Skills & Experience"
     desc="Here is a list of skills that I am proeffecient in, and I also have the ability to pick up a new skill and be good at it in a very less time."
   />
-  <div class="skills">
-    {skillsData.map((skill) => <Skill name={skill.name} img={skill.img} />)}
-  </div>
   <DarkCard>
-    <div class="experience">
-      <h3>{experience}+ Years of Experience</h3>
-      <p>SINCE 2021</p>
+    <div class="skills">
+      {skillsData.map((skill) => <Skill name={skill.name} img={skill.img} />)}
+
+      <div class="experience">
+        <h3>{experience}+ Years of Experience</h3>
+        <p>SINCE 2021</p>
+      </div>
     </div>
   </DarkCard>
 </section>
@@ -85,9 +86,19 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 3rem;
+      padding: 3rem;
     }
     .experience {
+      width: 100%;
+      margin-top: 4rem;
+      background-image: linear-gradient(
+        to right,
+        $light-bg 70%,
+        rgba(255, 255, 255, 0) 0%
+      );
+      background-position: top;
+      background-size: 30px 2px;
+      background-repeat: repeat-x;
       padding: 4rem;
 
       @include responsive(smartphone-landscape) {
@@ -141,19 +152,28 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
       duration: 1,
       ease: "power4.out",
     })
+    .from("#skills .dark-card", {
+      opacity: 0,
+      y: 50,
+      duration: 2,
+      ease: "power4.out",
+    })
     .from(
       "#skills .skill-box",
       {
         y: 20,
         opacity: 0,
-        stagger: 0.05,
+        stagger: 0.1,
+        duration: 2,
+        ease: "power4.out",
       },
       "<"
     )
-    .from("#skills .dark-card", {
+    .from("#skills .experience", {
       opacity: 0,
-      x: -200,
-      ease: "power4.in",
+      y: 50,
+      duration: 1,
+      ease: "power4.out",
     });
 
   const skillBoxes = document.querySelectorAll(
@@ -164,7 +184,10 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
     const child = box.querySelector(".skill") as HTMLDivElement;
 
     box.addEventListener("mouseleave", (e) => {
-      resetParallax(e.currentTarget as HTMLDivElement, child);
+      resetParallax({
+        container: e.currentTarget as HTMLDivElement,
+        child,
+      });
     });
     box.addEventListener("mousemove", (e) => {
       e.currentTarget &&

@@ -96,20 +96,10 @@ import aboutImg from "@/assets/about.webp";
       duration: 1,
       ease: "power4.out",
     })
-    .from("#about .img-container", {
-      x: -200,
+    .from("#about .about-content", {
+      y: 50,
       opacity: 0,
-      duration: 1,
-      ease: "power2.in",
-    })
-    .from(
-      "#about .about-content p",
-      {
-        x: 200,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.in",
-      },
-      "<"
-    );
+      duration: 2,
+      ease: "power4.out",
+    });
 </script>
