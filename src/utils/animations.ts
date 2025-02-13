@@ -1,5 +1,41 @@
 import gsap from "gsap";
 
+export const parallaxAnimation = ({
+  child,
+  movement = 10,
+  container,
+  duration = 2,
+  parallaxMultiplier = 0.7,
+  scale = 1,
+}: {
+  child?: HTMLElement | SVGElement;
+  movement?: number;
+  container: HTMLElement;
+  duration?: number;
+  ease?: string;
+  parallaxMultiplier?: number;
+  scale?: number;
+}) => {
+  container.addEventListener("mousemove", (e) => {
+    e.currentTarget &&
+      parallaxIt({
+        e: e,
+        container: e.currentTarget as HTMLElement,
+        child,
+        movement,
+        parallaxMultiplier,
+        scale,
+      });
+  });
+  container.addEventListener("mouseleave", (e) => {
+    resetParallax({
+      container: e.currentTarget as HTMLButtonElement,
+      child,
+      duration,
+    });
+  });
+};
+
 export const parallaxIt = ({
   e,
   child,

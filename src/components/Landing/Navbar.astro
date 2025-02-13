@@ -163,9 +163,9 @@ import NavLinks from "./NavLinks.astro";
   }
 </style>
 <script>
-  import { parallaxIt, resetParallax } from "@/utils/animations";
+  import { parallaxAnimation } from "@/utils/animations";
   import gsap from "gsap";
-  const menuBtn = document.getElementById("menu-btn");
+  const menuBtn = document.getElementById("menu-btn") as HTMLButtonElement;
   const navMenu = document.querySelector(".menu-container");
 
   const openMenu = gsap.timeline({ paused: true });
@@ -205,20 +205,9 @@ import NavLinks from "./NavLinks.astro";
 
   const svg = menuBtn?.querySelector("svg") as SVGElement;
 
-  menuBtn?.addEventListener("mouseleave", (e) => {
-    resetParallax({
-      container: e.currentTarget as HTMLDivElement,
-      child: svg,
-    });
-  });
-  menuBtn?.addEventListener("mousemove", (e) => {
-    e.currentTarget &&
-      parallaxIt({
-        e: e,
-        child: svg,
-        container: e.currentTarget as HTMLDivElement,
-        movement: 20,
-      });
+  parallaxAnimation({
+    container: menuBtn,
+    child: svg,
   });
 
   navMenu?.addEventListener("click", (e) => {

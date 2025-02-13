@@ -128,7 +128,7 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
   }
 </style>
 <script>
-  import { parallaxIt, resetParallax } from "@/utils/animations";
+  import { parallaxAnimation } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/src/ScrollTrigger";
 
@@ -183,20 +183,10 @@ const experience = currentYear - 2021 - (currentMonth < 6 ? 1 : 0);
   skillBoxes.forEach((box) => {
     const child = box.querySelector(".skill") as HTMLDivElement;
 
-    box.addEventListener("mouseleave", (e) => {
-      resetParallax({
-        container: e.currentTarget as HTMLDivElement,
-        child,
-      });
-    });
-    box.addEventListener("mousemove", (e) => {
-      e.currentTarget &&
-        parallaxIt({
-          e: e,
-          child: child,
-          container: e.currentTarget as HTMLDivElement,
-          movement: 5,
-        });
+    parallaxAnimation({
+      child,
+      container: box,
+      movement: 10,
     });
   });
 </script>

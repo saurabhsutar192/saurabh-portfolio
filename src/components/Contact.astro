@@ -67,7 +67,7 @@ import Title from "./core/Title.astro";
   }
 </style>
 <script>
-  import { parallaxIt, resetParallax } from "@/utils/animations";
+  import { parallaxAnimation } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/src/ScrollTrigger";
 
@@ -103,18 +103,10 @@ import Title from "./core/Title.astro";
   ) as NodeListOf<HTMLAnchorElement>;
 
   anchors.forEach((a) => {
-    a.addEventListener("mousemove", (e) => {
-      e.currentTarget &&
-        parallaxIt({
-          e: e,
-          container: e.currentTarget as HTMLDivElement,
-          movement: 10,
-          parallaxMultiplier: 0.5,
-          scale: 1.2,
-        });
-    });
-    a.addEventListener("mouseleave", (e) => {
-      resetParallax({ container: e.currentTarget as HTMLDivElement });
+    parallaxAnimation({
+      container: a,
+      movement: 10,
+      scale: 1.2,
     });
   });
 </script>

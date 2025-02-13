@@ -119,7 +119,7 @@ const projects = [
 </style>
 
 <script>
-  import { parallaxIt, resetParallax } from "@/utils/animations";
+  import { parallaxAnimation } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/src/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
@@ -176,21 +176,11 @@ const projects = [
 
   const a = button.querySelector("a") as HTMLAnchorElement;
 
-  button.addEventListener("mousemove", (e) => {
-    e.currentTarget &&
-      parallaxIt({
-        e: e,
-        child: a,
-        container: e.currentTarget as HTMLDivElement,
-        movement: 5,
-        parallaxMultiplier: 0.5,
-        scale: 1.1,
-      });
-  });
-  button.addEventListener("mouseleave", (e) => {
-    resetParallax({
-      container: e.currentTarget as HTMLDivElement,
-      child: a,
-    });
+  parallaxAnimation({
+    child: a,
+    container: button,
+    movement: 5,
+    parallaxMultiplier: 0.5,
+    scale: 1.1,
   });
 </script>

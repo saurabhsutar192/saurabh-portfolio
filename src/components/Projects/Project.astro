@@ -89,8 +89,7 @@ const { name, img, desc, link } = Astro.props;
   }
 </style>
 <script>
-  import { resetParallax } from "@/utils/animations";
-  import { parallaxIt } from "@/utils/animations";
+  import { parallaxAnimation } from "@/utils/animations";
 
   const projectCards = document.querySelectorAll(
     ".project-card"
@@ -100,22 +99,12 @@ const { name, img, desc, link } = Astro.props;
     const button = card.querySelector("button") as HTMLButtonElement;
     const a = card.querySelector("button a") as HTMLAnchorElement;
 
-    button.addEventListener("mousemove", (e) => {
-      e.currentTarget &&
-        parallaxIt({
-          e: e,
-          child: a,
-          container: e.currentTarget as HTMLDivElement,
-          movement: 20,
-          parallaxMultiplier: 0.2,
-          scale: 1.2,
-        });
-    });
-    button.addEventListener("mouseleave", (e) => {
-      resetParallax({
-        container: e.currentTarget as HTMLDivElement,
-        child: a,
-      });
+    parallaxAnimation({
+      child: a,
+      container: button,
+      movement: 20,
+      parallaxMultiplier: 0.2,
+      scale: 1.2,
     });
   });
 </script>

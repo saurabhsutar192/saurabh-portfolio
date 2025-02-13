@@ -14,7 +14,7 @@
 </ul>
 
 <script>
-  import { parallaxIt, resetParallax } from "@/utils/animations";
+  import { parallaxAnimation } from "@/utils/animations";
   import gsap from "gsap";
   import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
@@ -36,19 +36,11 @@
 
     const p = button.querySelector("p") as HTMLParagraphElement;
 
-    button.addEventListener("mousemove", (e) => {
-      e.currentTarget &&
-        parallaxIt({
-          e: e,
-          container: e.currentTarget as HTMLButtonElement,
-          child: p || null,
-          movement: 10,
-          parallaxMultiplier: 0.3,
-          scale: 1.1,
-        });
-    });
-    button.addEventListener("mouseleave", (e) => {
-      resetParallax({ container: e.currentTarget as HTMLButtonElement });
+    parallaxAnimation({
+      container: button,
+      child: p,
+      scale: 1.1,
+      parallaxMultiplier: 0.3,
     });
   });
 </script>
