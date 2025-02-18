@@ -12,12 +12,15 @@ const projects = [
     img,
     desc: "A minimalistic and light-weight MIDI piano for the WEB.",
     link: "https://thepiano.vercel.app",
+    stack: "NextJs, Hover UI Library(Custom built by us), WEBMidi, SASS.",
   },
   {
     name: "OnLeave",
     img: onleave,
-    desc: "A leave management app to manage the Org Employee's leaves.",
+    desc: "A leave management app for organizing and tracking employee leaves.",
     link: "https://www.onleave.today",
+    stack:
+      "ReactJs, Mantine UI Library, Emotion's Styled Component, Stripe, React Table, React Router.",
   },
 ];
 ---
@@ -25,27 +28,18 @@ const projects = [
 <section id="projects">
   <Title
     name="Projects"
-    desc="Have a look at some of my recent works, where I have applied my skillset to the extreme level to deliver high quality frontend experience."
+    desc="Explore my latest projects, where I've leveraged my expertise to create exceptional, high-performance frontend experiences."
   />
   <DarkCard>
     <div class="projects-container">
-      {
-        projects.map((proj) => (
-          <Project
-            name={proj.name}
-            img={proj.img}
-            desc={proj.desc}
-            link={proj.link}
-          />
-        ))
-      }
+      {projects.map((proj) => <Project {...proj} />)}
 
       <div class="more-projects">
         <h3>Find more of my work!</h3>
         <p>
-          This will take you to my GitHub Repository, where you will find my
-          above projects as well as a lot of small scale projects made using
-          different technologies.
+          This will take you to my GitHub repository, where you’ll find the
+          projects showcased above, along with a variety of smaller projects
+          built using different technologies.
         </p>
         <button>
           <a

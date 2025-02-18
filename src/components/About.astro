@@ -11,8 +11,9 @@ import aboutImg from "@/assets/about.webp";
     <div class="img-container"><Image src={aboutImg} alt="Setup" /></div>
 
     <p>
-      I am currently working as a <span>Frontend Developer</span> at <span
-        >AntStack Technologies, Bengaluru</span
+      I am currently working as a <span>Frontend Developer</span> at <a
+        href="https://www.antstack.com"
+        target="_blank">AntStack Technologies, Bengaluru</a
       >, where my passion for building seamless and dynamic user experiences
       comes to life. Beyond coding, I’m a <span>musician </span>at heart—I play
       the <span>piano</span> and find creative inspiration through music. In my free
@@ -58,7 +59,9 @@ import aboutImg from "@/assets/about.webp";
         font-size: 1.2rem;
         line-height: 2.5rem;
         font-weight: 500;
-        span {
+        span,
+        a {
+          color: $dark-text;
           font-size: 1.6rem;
           margin: 0.3rem;
           font-weight: 900;

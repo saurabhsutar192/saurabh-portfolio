@@ -6,9 +6,10 @@ interface Props {
   img: ImageMetadata;
   desc: string;
   link: string;
+  stack: string;
 }
 
-const { name, img, desc, link } = Astro.props;
+const { name, img, desc, link, stack } = Astro.props;
 ---
 
 <div class="project-card">
@@ -21,6 +22,7 @@ const { name, img, desc, link } = Astro.props;
     </div>
     <button><a href={link} target="_blank">Visit</a></button>
   </div>
+  <div class="stack"><p>FE Stack :</p><p>{stack}</p></div>
 </div>
 
 <style lang="scss" is:global>
@@ -50,6 +52,20 @@ const { name, img, desc, link } = Astro.props;
         object-position: left top;
       }
     }
+
+    p {
+      line-height: 1.2rem;
+      font-size: 0.8rem;
+    }
+
+    .stack {
+      display: flex;
+      gap: 1rem;
+      p:first-child {
+        white-space: nowrap;
+        font-weight: 600;
+      }
+    }
     .attributes {
       padding: 2rem 0;
       display: flex;
@@ -62,10 +78,6 @@ const { name, img, desc, link } = Astro.props;
         font-weight: 600;
         line-height: 2rem;
         margin-bottom: 1rem;
-      }
-      p {
-        line-height: 1.2rem;
-        font-size: 0.8rem;
       }
 
       button {

@@ -132,12 +132,15 @@ import NavLinks from "./NavLinks.astro";
         height: 0px;
         width: 0px;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .nav-list {
           display: flex;
           align-items: flex-start;
           justify-content: center;
           flex-direction: column;
-          margin: 40px;
+          margin: 2rem;
           gap: 20px;
 
           li {
@@ -175,7 +178,7 @@ import NavLinks from "./NavLinks.astro";
     .to(
       ".menu-container",
       {
-        height: "16rem",
+        height: "15.2rem",
         width: "auto",
         duration: 0.3,
         ease: "power4.out",
